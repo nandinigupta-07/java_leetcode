@@ -27,9 +27,10 @@ class Solution {
     public TreeNode buildtree(int preorder[],int prestart,int preend,int inorder[],int instart,int inend,Map<Integer,Integer> map){
         if(prestart>preend || instart>inend) return null;
         TreeNode root=new TreeNode(preorder[prestart]);
+        
         int inroot=map.get(root.val);
-        int numsleft=inroot-instart;
-        root.left=buildtree(preorder,prestart+1,prestart+numsleft,inorder,instart,inroot-1,map);
+         int numsleft=inroot-instart;
+        root.left=buildtree(preorder,prestart+1,prestart+numsleft,inorder,instart, inroot-1,map);
         root.right=buildtree(preorder,prestart+numsleft+1,preend,inorder,inroot+1,inend,map);
         return root;
     }
