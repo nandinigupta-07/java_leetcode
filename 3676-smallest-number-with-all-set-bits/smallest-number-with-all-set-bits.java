@@ -1,14 +1,11 @@
 class Solution {
     public int smallestNumber(int n) {
-        String binary=Integer.toBinaryString(n);
-        char arr[]=binary.toCharArray();
-        for(int i=0;i<arr.length;i++){
-            if(arr[i]=='0'){
-                 arr[i]='1';
+        for(int i=0;i<n;i++){
+            int ans=(int)Math.pow(2,i);
+            if(ans>n){
+                return ans-1;
             }
         }
-        String up=new String(arr);
-        int dec=Integer.parseInt(up,2);
-        return dec;
+        return 1;
     }
 }
