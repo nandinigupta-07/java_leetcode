@@ -1,19 +1,40 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
-        int n=nums.length;
-         HashSet<Integer> set=new HashSet<>();
-        for(int i=0;i<nums.length;i++){
-            int cnt=0;
-            for(int j=0;j<nums.length;j++){
-                if(nums[i]==nums[j]){
-                    cnt++;
-                }
-            }
-            if(cnt>n/3){
-                set.add(nums[i]);
+        Integer candidate1 = null, candidate2 = null;
+        int count1 = 0, count2 = 0;
+
+        // 1️⃣ Find potential candidates
+        for (int num : nums) {
+            if (candidate1 != null && num == candidate1)
+                count1++;
+            else if (candidate2 != null && num == candidate2)
+                count2++;
+            else if (count1 == 0) {
+                candidate1 = num;
+                count1 = 1;
+            } else if (count2 == 0) {
+                candidate2 = num;
+                count2 = 1;
+            } else {
+                count1--;
+                count2--;
             }
         }
-        List<Integer> list=new ArrayList<>(set);
-        return list;
+
+        // 2️⃣ Verify counts
+        count1 = 0;
+        count2 = 0;
+        for (int num : nums) {
+            if (num == candidate1) count1++;
+            else if (num == candidate2) count2++;
+        }
+
+        // 3️⃣ Prepare result
+        List<Integer> result = new ArrayList<>();
+        int n = nums.length;
+        if (count1 > n / 3) result.add(candidate1);
+        if (count2 > n / 3) result.add(candidate2);
+
+        return result;
     }
 }
