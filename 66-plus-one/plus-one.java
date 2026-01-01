@@ -5,12 +5,12 @@ class Solution {
             digit[n]=digit[n]+1;
             return digit;
         }
-          if(digit.length==1 && digit[0]==9){
-            int arr[]=new int[2];
-            arr[0]=1;
-            arr[1]=0;
-            return arr;
-          } 
+        //   if(digit.length==1 && digit[0]==9){
+        //     int arr[]=new int[2];
+        //     arr[0]=1;
+        //     arr[1]=0;
+        //     return arr;
+        //   } 
           int count=0;
           for(int i=digit.length-1;i>=0;i--){
             if(digit[i]==9){
