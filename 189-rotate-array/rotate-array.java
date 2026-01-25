@@ -1,20 +1,13 @@
 class Solution {
     public void rotate(int[] nums, int k) {
-        int ans[]=new int[nums.length];
-        int u=0;
-        int n=nums.length;
-        k=k%n;
-        for(int i=n-k;i<n;i++){
-            ans[u]=nums[i];
-            u++;
+        ArrayList<Integer> list=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            list.add(nums[i]);
         }
-        for(int i=0;i<n-k;i++){
-            ans[u]=nums[i];
-            u++;
+        k=k%nums.length;
+        Collections.rotate(list, k);
+        for(int i =0;i<nums.length;i++){
+            nums[i]=list.get(i);
         }
-        for(int i=0;i<ans.length;i++){
-            nums[i]=ans[i];
-        }
-        return;
     }
 }
