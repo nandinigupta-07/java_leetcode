@@ -1,34 +1,19 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
-        int arr[]=new int[nums.length];
-        int sum=1;
-         for(int i=0;i<nums.length;i++){
-            if(nums[i]==0){
-                continue;
-            }else{
-                sum*=nums[i];
-            }  
+         int pre[]=new int[nums.length];
+         int suf[]=new int[nums.length];
+         int ans []=new int[nums.length];
+         pre[0]=1;
+         suf[nums.length-1]=1;
+         for(int i=1;i<nums.length;i++){
+            pre[i]=nums[i-1]*pre[i-1];
          }
-         Arrays.fill(arr,0);
-         int zero=0;
-         for(int i=0;i<nums.length;i++){
-             if(nums[i]==0){
-                zero++;
-             }
-         }
-         if(zero>=2){
-            return arr;
-         }
-          
-         for(int i=0;i<nums.length;i++){
-            if(nums[i]==0){
-                arr[i]=sum;
-                return arr;
-            }
+         for(int i=nums.length-2;i>=0;i--){
+            suf[i]=nums[i+1]*suf[i+1];
          }
          for(int i=0;i<nums.length;i++){
-            arr[i]=sum/nums[i];
+            ans[i]=pre[i]*suf[i];
          }
-        return arr;
+         return ans;
     }
 }
